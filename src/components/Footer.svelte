@@ -8,7 +8,7 @@
 		<p><b class="pr-2">facebook</b> <a class="text-violet-400" href="https://www.facebook.com/niel.peruda" target="_blank"> 
             Niel Peruda <sup ><span class="text-xs scale-5 pl-0.5"><i class="fa-solid fa-arrow-up-right-from-square text-xs scale-[75%]"></i></span></sup>
         </a></p>
-		<p><b class="pr-2">LinkedIn</b> <a class="text-violet-400" href="www.linkedin.com/in/reniel-peruda-14106a346" target="_blank"> 
+		<p><b class="pr-2">LinkedIn</b> <a class="text-violet-400" href="https://www.linkedin.com/in/reniel-peruda-14106a346/" target="_blank"> 
             Reniel Peruda <sup><span class="text-xs scale-5 pl-0.5"><i class="fa-solid fa-arrow-up-right-from-square text-xs scale-[75%]"></i></span></sup>
         </a></p>
 	</div>

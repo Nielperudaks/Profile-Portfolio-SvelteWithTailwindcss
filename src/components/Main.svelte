@@ -100,7 +100,7 @@
 			name: 'Svelte',
 			icon: 'https://img.icons8.com/?size=75&id=7ST6T6xV3OPb&format=png&color=FFFFFF',
 			img: 'images/svelte-profile.png',
-			link: 'https://github.com/Nielperudaks/Franco-Pascual-Dental-Clinic-Web-Based-Online-Appointment-System'
+			link: 'https://github.com/Nielperudaks/Profile-Portfolio-SvelteWithTailwindcss'
 		}
 	];
 	let benefits = [
@@ -176,15 +176,15 @@
 				Curious to <span class="montserrat text-violet-400">see </span> my work?
 			</h3>
 		</div>
-		<!-- <a
-			href="#"
+		<a
+			href="https://github.com/Nielperudaks"
 			target="_blank"
 			class="mx-auto px-4 py-2 rounded-md border border-solid border-white
             flex items-center gap-2 -mb-4 sm:-mb-0 -mt-10 hover:border-violet-700 duration-300"
 		>
 			<i class="fa-regular fa-circle-play"></i>
-			<p>Watch the video</p>
-		</a> -->
+			<p>Check my Github</p>
+		</a>
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10">
 			<Step step={steps[0]}>
 				<p class="montserrat font-light">

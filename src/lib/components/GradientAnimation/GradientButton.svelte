@@ -50,7 +50,7 @@
 
 
 	<a 
-		href="#"
+		href="https://www.linkedin.com/in/reniel-peruda-14106a346/"
 		target="_blank"
 		class={cn(className," transition-all duration-300 hover:scale-105")}
 		
