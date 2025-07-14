@@ -135,7 +135,7 @@
 				<GradualSpacing class="montserrat  text-8xl sm:text-9xl font-light" words="Peruda" />
 				<!-- <br /><GradualSpacing class="montserrat text-3xl font-extralight" words="Full Stack Developer"/> -->
 				<GradualSpacingCycle
-					class="montserrat text-3xl  font-extralight"
+					class="montserrat text-2xl sm:text-3xl  font-extralight"
 					words={['Full Stack Developer', 'UI/UX Designer', 'Creative Coder', 'Problem Solver']}
 					cycleDuration={3000}
 				/>
