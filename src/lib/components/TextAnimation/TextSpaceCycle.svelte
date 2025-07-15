@@ -56,9 +56,11 @@
   });
 </script>
 
-<div class="flex justify-center md:justify-start">
+<!-- Added overflow-hidden and min-w-0 to prevent horizontal scrollbar -->
+<div class="flex justify-center md:justify-start overflow-hidden min-w-0">
   <AnimatePresence let:item list={[{ key: currentWordIndex }]}>
-    <div class="flex">
+    <!-- Added overflow-hidden and will-change-transform for better performance -->
+    <div class="flex overflow-hidden will-change-transform">
       {#if showWord}
         {#each wordsSplit as char, i}
           <Motion
@@ -71,7 +73,8 @@
             }}
             let:motion
           >
-            <span use:motion class={cn("drop-shadow-sm", className)}>
+            <!-- Added transform-gpu for hardware acceleration -->
+            <span use:motion class={cn("drop-shadow-sm transform-gpu", className)}>
               {#if char === " "}
                 <span>&nbsp;</span>
               {:else}

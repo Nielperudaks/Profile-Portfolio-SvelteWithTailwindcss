@@ -30,7 +30,37 @@
   ];
 
   const items = [...products, ...products];
+  
+  let activeTappedIndex = $state(null);
+  let tapTimer = null;
+
+  function handleTap(index) {
+    // Clear any existing timer
+    if (tapTimer) {
+      clearTimeout(tapTimer);
+    }
+    
+    // Show tooltip for this item
+    activeTappedIndex = index;
+    
+    // Auto-hide tooltip after 2 seconds
+    tapTimer = setTimeout(() => {
+      activeTappedIndex = null;
+    }, 2000);
+  }
+
+  function handleClickOutside(event) {
+    // Hide tooltip when clicking outside
+    if (!event.target.closest('.logo-item')) {
+      activeTappedIndex = null;
+      if (tapTimer) {
+        clearTimeout(tapTimer);
+      }
+    }
+  }
 </script>
+
+<svelte:window on:click={handleClickOutside} />
 
 <!-- wrapper keeps the padding / boundaries -->
 <div class="relative w-full isolate overflow-hidden pt-10 ">
@@ -42,17 +72,25 @@
   <!-- scrolling row (relative so it respects parent padding) -->
   <div class="relative flex h-30 sm:h-40 items-center">
     <div class="flex animate-marquee items-center space-x-20">
-      {#each items as { title, thumbnail }}
-        <div class="relative group flex-shrink-0">
+      {#each items as { title, thumbnail }, index}
+        <div 
+          class="relative group flex-shrink-0 logo-item cursor-pointer"
+          on:click={() => handleTap(index)}
+          on:keydown={(e) => e.key === 'Enter' && handleTap(index)}
+          tabindex="0"
+          role="button"
+          aria-label="Show {title} tooltip"
+        >
           <img
             src={thumbnail}
             alt={title}
             class="sm:h-40 h-30 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
           />
-          <div
+          <div 
             class="absolute -top-9 left-1/2 -translate-x-1/2
                    rounded-md bg-slate-700 px-2 py-1 text-sm text-white
-                   opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                   transition-opacity duration-200 pointer-events-none z-20
+                   {activeTappedIndex === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}"
           >
             {title}
           </div>
@@ -70,5 +108,15 @@
 
   :global(.animate-marquee) {
     animation: marquee 30s linear infinite;
+  }
+
+  /* Hide focus outline on mobile but keep for keyboard navigation */
+  .logo-item:focus {
+    outline: 2px solid transparent;
+  }
+
+  .logo-item:focus-visible {
+    outline: 2px solid #8b5cf6;
+    outline-offset: 2px;
   }
 </style>

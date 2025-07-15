@@ -1,5 +1,8 @@
 <script>
 	import ButtonGradient from '$lib/components/GradientAnimation/GradientButton.svelte';
+	import { onMount } from "svelte";
+	import { tweened } from "svelte/motion";
+	import { cubicOut } from "svelte/easing";
 
 	export let y;
 	
@@ -13,9 +16,41 @@
 			link: '#about'
 		}
 	];
+
+	// Tweened opacity for smooth button transitions
+	const buttonOpacity = tweened(0, {
+		duration: 400,
+		easing: cubicOut
+	});
+
+	let threshold = 0.8; // When to start fading (0.8 = 80% of viewport height)
+
+	onMount(() => {
+		const handleScroll = () => {
+			const scrollY = window.scrollY;
+			const viewportHeight = window.innerHeight;
+			const fadeThreshold = viewportHeight * threshold;
+			
+			// Fade in when scrolled beyond threshold, fade out when within default view
+			if (scrollY > fadeThreshold) {
+				buttonOpacity.set(1);
+			} else {
+				buttonOpacity.set(0);
+			}
+		};
+
+		// Initial check
+		handleScroll();
+		
+		// Add scroll listener
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		
+		// Cleanup
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	});
 </script>
-
-
 
 <header
 	class={'sticky z-[10] top-0 duration-300 px-6 flex items-center justify-between border border-solid ' +
@@ -30,12 +65,9 @@
 			</a>
 		{/each}
 	</div>
-	<ButtonGradient className="blueShadow relative overflow-hidden px-5 py-2 group rounded-full bg-white text-slate-950">Get in touch &rarr;</ButtonGradient>
-    <!-- <a href="#"
-        target="_blank" 
-        class="blueShadow relative overflow-hidden px-5 py-2 group rounded-full bg-white text-slate-950">
-        <div class="absolute top-0 right-full w-full h-full bg-violet-400 opacity-20 group-hover:translate-x-full z-0 duration-300 ">
-        </div>
-        <h4 class="relative z-9">Get in touch</h4>
-    </a> -->
+	<div class="flex" style="opacity: {$buttonOpacity}; pointer-events: {$buttonOpacity > 0.1 ? 'auto' : 'none'};">
+		<ButtonGradient className="blueShadow relative overflow-hidden px-5 py-2 group rounded-full bg-white text-slate-950 transition-all duration-300">
+			Get in touch &rarr;
+		</ButtonGradient>
+	</div>
 </header>
